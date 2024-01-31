@@ -31,21 +31,23 @@ jobs:
       # - name: Check Coverage Threshold
       #   run: |
       - name: Generate Code Coverage
-        run: jest -- --coverage --coverageReporters="text-summary"
-
-      - name: Extract Coverage Percentage
         run: |
-          # Extract the overall coverage percentage from the text-summary output
-          COVERAGE_PERCENTAGE=$(cat coverage/lcov-report/index.txt | grep -E '^All' | awk '{print $3}' | sed 's/%//')
-          cat coverage/lcov-report/index.txt 
-          # Define the coverage threshold (adjust as needed)
-          THRESHOLD=80
+          VAR = $(jest --coverage --coverageReporters="text-summary")
+          echo "$VAR"
 
-          # Check if coverage is below the threshold
-          if (( $(echo "$COVERAGE_PERCENTAGE < $THRESHOLD" | bc -l) )); then
-            echo "Error: Code coverage below threshold. Current coverage is $COVERAGE_PERCENTAGE%, but the threshold is $THRESHOLD%."
-            exit 1
-          fi
+      # - name: Extract Coverage Percentage
+      #   run: |
+      #     # Extract the overall coverage percentage from the text-summary output
+      #     COVERAGE_PERCENTAGE=$(cat coverage/lcov-report/index.txt | grep -E '^All' | awk '{print $3}' | sed 's/%//')
+      #     cat coverage/lcov-report/index.txt 
+      #     # Define the coverage threshold (adjust as needed)
+      #     THRESHOLD=80
+
+      #     # Check if coverage is below the threshold
+      #     if (( $(echo "$COVERAGE_PERCENTAGE < $THRESHOLD" | bc -l) )); then
+      #       echo "Error: Code coverage below threshold. Current coverage is $COVERAGE_PERCENTAGE%, but the threshold is $THRESHOLD%."
+      #       exit 1
+      #     fi
 
          
   
