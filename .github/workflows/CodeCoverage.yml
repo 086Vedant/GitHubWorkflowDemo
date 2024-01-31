@@ -30,9 +30,15 @@ jobs:
 
       # - name: Check Coverage Threshold
       #   run: |
-      - name: Generate Code Coverage
+      - name: Install Jest (if not globally available)
+        run: npm install --save-dev jest
+
+      - name: Run Tests and Coverage
         run: |
-          VAR = $(jest --coverage --coverageReporters="text-summary")
+          # Run tests with coverage and capture the output
+          VAR=$(npx jest --coverage --coverageReporters="text-summary")
+
+          # Echo the coverage summary
           echo "$VAR"
 
       # - name: Extract Coverage Percentage
