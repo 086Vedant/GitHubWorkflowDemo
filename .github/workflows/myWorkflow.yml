@@ -2,20 +2,24 @@ name: Check Code Patterns
 
 on:
   push:
-     branches:
+    branches:
       - '**' # Run on all branches
+
 jobs:
   check-patterns:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4.1.1
-    - uses: jitterbit/get-changed-files@v1
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+
+      - name: Get changed files
         id: abc
+        uses: jitterbit/get-changed-files@v1
         with:
           format: space-delimited
           token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Printing
         run: |
           echo "All:"
@@ -30,6 +34,7 @@ jobs:
           echo "${{ steps.abc.outputs.modified }}"
           echo "Added+Modified:"
           echo "${{ steps.abc.outputs.added_modified }}"
+
    
 
     # - name: Check for forbidden patterns
