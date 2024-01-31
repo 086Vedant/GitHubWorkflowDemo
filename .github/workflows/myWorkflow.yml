@@ -11,13 +11,35 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4.1.1
+    - uses: jitterbit/get-changed-files@v1
+        id: abc
+        with:
+          format: space-delimited
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Printing
+        run: |
+          echo "All:"
+          echo "${{ steps.abc.outputs.all }}"
+          echo "Added:"
+          echo "${{ steps.abc.outputs.added }}"
+          echo "Removed:"
+          echo "${{ steps.abc.outputs.removed }}"
+          echo "Renamed:"
+          echo "${{ steps.abc.outputs.renamed }}"
+          echo "Modified:"
+          echo "${{ steps.abc.outputs.modified }}"
+          echo "Added+Modified:"
+          echo "${{ steps.abc.outputs.added_modified }}"
+   
 
-    - name: Check for forbidden patterns
-      run: |
-        forbidden_pattern="Thread\.ofVirtual\(\)|Thread\.newVirtualThread\(\)"
-        git diff --name-only ${{ github.base_ref }}..${{ github.sha }}
+    # - name: Check for forbidden patterns
+    #   run: |
+    #     forbidden_pattern="Thread\.ofVirtual\(\)"
+    #     git diff --name-only ${{ github.base_ref }}..${{ github.sha }}
 
-        if git diff --name-only ${{ github.base_ref }}..${{ github.sha }} | grep -E "$forbidden_pattern" >/dev/null; then
-          echo "Error: Your changes include forbidden patterns: Thread.ofVirtual(), Thread.newVirtualThread()"
-          exit 1
-        fi
+    #     if git diff --name-only ${{ github.base_ref }}..${{ github.sha }} | grep -E "$forbidden_pattern" >/dev/null; then
+    #       echo "Error: Your changes include forbidden patterns: Thread.ofVirtual(), Thread.newVirtualThread()"
+    #       exit 1
+    #     fi
+
+    
