@@ -1,7 +1,8 @@
 name: Test and Coverage Check
 
 on:
-  pull_request:
+  #pull_request:
+  push:
     paths:
       - '**/*.js'
 
