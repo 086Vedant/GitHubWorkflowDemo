@@ -36,7 +36,7 @@ jobs:
       - name: Run Tests and Coverage
         run: |
           # Run tests with coverage and capture the output
-          VAR=$(npx jest --coverage --coverageReporters="text-summary")
+          VAR=$(npx jest --coverage --coverageReporters="json-summary")
 
           # Echo the coverage summary
           echo "$VAR"
