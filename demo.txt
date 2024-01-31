@@ -1,2 +1,2 @@
-Thread.ofVirtual()
-Thread.newVirtualThread()
+Thread.ofVirtual()..
+Thread.newVirtualThread()..
