@@ -16,9 +16,7 @@ name: Check Code Patterns
 
 on:
   pull_request:
-    paths:
-      - '**/*.java' # Adjust this based on your project structure
-
+    
 jobs:
   check-patterns:
     runs-on: ubuntu-latest
