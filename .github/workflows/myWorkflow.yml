@@ -34,7 +34,16 @@ jobs:
           echo "${{ steps.abc.outputs.modified }}"
           echo "Added+Modified:"
           echo "${{ steps.abc.outputs.added_modified }}"
+    
+      - name: Check for forbidden patterns
+        run: |
+          forbidden_pattern="Thread\.ofVirtual\(\)|Thread\.newVirtualThread\(\)"
 
+          # Check for patterns in all modified files
+          if grep -E "$forbidden_pattern" ${{ steps.abc.outputs.modified }}; then
+            echo "Error: Your changes include forbidden patterns: Thread.ofVirtual(), Thread.newVirtualThread()"
+            exit 1
+          fi
    
 
     # - name: Check for forbidden patterns
