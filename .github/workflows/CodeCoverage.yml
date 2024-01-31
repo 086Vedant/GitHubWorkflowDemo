@@ -25,8 +25,30 @@ jobs:
       - name: Run Tests
         run: npm test
 
+      # - name: Generate Code Coverage
+      #   run: npm run coverage
+
+      # - name: Check Coverage Threshold
+      #   run: |
       - name: Generate Code Coverage
-        run: npm run coverage
+        run: jest --coverage --coverageReporters="text-summary"
+
+      - name: Extract Coverage Percentage
+        run: |
+          # Extract the overall coverage percentage from the text-summary output
+          COVERAGE_PERCENTAGE=$(cat coverage/lcov-report/index.txt | grep -E '^All' | awk '{print $3}' | sed 's/%//')
+          cat coverage/lcov-report/index.txt 
+          # Define the coverage threshold (adjust as needed)
+          THRESHOLD=80
+
+          # Check if coverage is below the threshold
+          if (( $(echo "$COVERAGE_PERCENTAGE < $THRESHOLD" | bc -l) )); then
+            echo "Error: Code coverage below threshold. Current coverage is $COVERAGE_PERCENTAGE%, but the threshold is $THRESHOLD%."
+            exit 1
+          fi
+
+         
+  
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4.3.0
