@@ -1,4 +1,1 @@
-Thread.ofVirtual()
 
-
-Thread.newVirtualThread()
