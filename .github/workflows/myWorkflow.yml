@@ -46,14 +46,4 @@ jobs:
           fi
    
 
-    # - name: Check for forbidden patterns
-    #   run: |
-    #     forbidden_pattern="Thread\.ofVirtual\(\)"
-    #     git diff --name-only ${{ github.base_ref }}..${{ github.sha }}
-
-    #     if git diff --name-only ${{ github.base_ref }}..${{ github.sha }} | grep -E "$forbidden_pattern" >/dev/null; then
-    #       echo "Error: Your changes include forbidden patterns: Thread.ofVirtual(), Thread.newVirtualThread()"
-    #       exit 1
-    #     fi
-
     
