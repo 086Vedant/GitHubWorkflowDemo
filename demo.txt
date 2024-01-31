@@ -1,0 +1,2 @@
+Thread.ofVirtual()
+Thread.newVirtualThread()
