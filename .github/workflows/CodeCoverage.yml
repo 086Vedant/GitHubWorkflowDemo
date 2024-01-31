@@ -31,7 +31,7 @@ jobs:
       # - name: Check Coverage Threshold
       #   run: |
       - name: Generate Code Coverage
-        run: jest --coverage --coverageReporters="text-summary"
+        run: jest -- --coverage --coverageReporters="text-summary"
 
       - name: Extract Coverage Percentage
         run: |
