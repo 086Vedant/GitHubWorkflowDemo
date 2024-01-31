@@ -39,6 +39,7 @@ jobs:
           VAR=$(npx jest --coverage --coverageReporters="json-summary")
 
           # Echo the coverage summary
+          echo "Jest Output:"
           echo "$VAR"
 
       # - name: Extract Coverage Percentage
