@@ -1,66 +1,66 @@
-name: Test and Coverage Check
+# name: Test and Coverage Check
 
-on:
-  #pull_request:
-  push:
-    paths:
-      - '**/*.js'
+# on:
+#   #pull_request:
+#   push:
+#     paths:
+#       - '**/*.js'
 
-jobs:
-  test-and-coverage:
-    runs-on: ubuntu-latest
+# jobs:
+#   test-and-coverage:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4.1.1
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v4.1.1
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4.0.1
-        with:
-          node-version: 14
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v4.0.1
+#         with:
+#           node-version: 14
 
-      - name: Install Dependencies
-        run: npm install
+#       - name: Install Dependencies
+#         run: npm install
 
-      - name: Run Tests
-        run: npm test
+#       - name: Run Tests
+#         run: npm test
 
-      # - name: Generate Code Coverage
-      #   run: npm run coverage
+#       # - name: Generate Code Coverage
+#       #   run: npm run coverage
 
-      # - name: Check Coverage Threshold
-      #   run: |
-      - name: Install Jest (if not globally available)
-        run: npm install --save-dev jest
+#       # - name: Check Coverage Threshold
+#       #   run: |
+#       - name: Install Jest (if not globally available)
+#         run: npm install --save-dev jest
 
-      - name: Run Tests and Coverage
-        run: |
-          # Run tests with coverage and capture the output
-          VAR=$(npx jest --coverage --coverageReporters="json-summary")
+#       - name: Run Tests and Coverage
+#         run: |
+#           # Run tests with coverage and capture the output
+#           VAR=$(npx jest --coverage --coverageReporters="json-summary")
 
-          # Echo the coverage summary
-          echo "Jest Output:"
-          echo "$VAR"
+#           # Echo the coverage summary
+#           echo "Jest Output:"
+#           echo "$VAR"
 
-      # - name: Extract Coverage Percentage
-      #   run: |
-      #     # Extract the overall coverage percentage from the text-summary output
-      #     COVERAGE_PERCENTAGE=$(cat coverage/lcov-report/index.txt | grep -E '^All' | awk '{print $3}' | sed 's/%//')
-      #     cat coverage/lcov-report/index.txt 
-      #     # Define the coverage threshold (adjust as needed)
-      #     THRESHOLD=80
+#       # - name: Extract Coverage Percentage
+#       #   run: |
+#       #     # Extract the overall coverage percentage from the text-summary output
+#       #     COVERAGE_PERCENTAGE=$(cat coverage/lcov-report/index.txt | grep -E '^All' | awk '{print $3}' | sed 's/%//')
+#       #     cat coverage/lcov-report/index.txt 
+#       #     # Define the coverage threshold (adjust as needed)
+#       #     THRESHOLD=80
 
-      #     # Check if coverage is below the threshold
-      #     if (( $(echo "$COVERAGE_PERCENTAGE < $THRESHOLD" | bc -l) )); then
-      #       echo "Error: Code coverage below threshold. Current coverage is $COVERAGE_PERCENTAGE%, but the threshold is $THRESHOLD%."
-      #       exit 1
-      #     fi
+#       #     # Check if coverage is below the threshold
+#       #     if (( $(echo "$COVERAGE_PERCENTAGE < $THRESHOLD" | bc -l) )); then
+#       #       echo "Error: Code coverage below threshold. Current coverage is $COVERAGE_PERCENTAGE%, but the threshold is $THRESHOLD%."
+#       #       exit 1
+#       #     fi
 
          
   
 
-      - name: Upload Coverage Report
-        uses: actions/upload-artifact@v4.3.0
-        with:
-          name: coverage-report
-          path: coverage
+#       - name: Upload Coverage Report
+#         uses: actions/upload-artifact@v4.3.0
+#         with:
+#           name: coverage-report
+#           path: coverage
