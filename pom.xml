@@ -23,6 +23,11 @@
     </dependencies>
 
     <build>
+            <sourceDirectory>src/main/resource</sourceDirectory>
+            <testSourceDirectory>src/test/resource</testSourceDirectory>
+    <!-- ... other configuration ... -->
+
+
         <plugins>
             <!-- Add JaCoCo plugin for code coverage -->
             <plugin>
